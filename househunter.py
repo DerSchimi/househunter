@@ -7,7 +7,6 @@ import logging
 import time
 import yaml
 from househunter.crawl_immobilienscout import CrawlImmobilienscout
-from househunter.crawl_wggesucht import CrawlWgGesucht
 from househunter.idmaintainer import IdMaintainer
 from househunter.hunter import Hunter
 from househunter.crawl_ebaykleinanzeigen import CrawlEbayKleinanzeigen
@@ -40,7 +39,7 @@ __log__ = logging.getLogger(__name__)
 
 
 def launch_flat_hunt(config):
-    searchers = [CrawlImmobilienscout(), CrawlWgGesucht(),CrawlEbayKleinanzeigen(),CrawlImmoWelt()]
+    searchers = [CrawlImmobilienscout(), CrawlEbayKleinanzeigen(),CrawlImmoWelt()]
     id_watch = IdMaintainer('%s/processed_ids.db' % os.path.dirname(os.path.abspath(__file__)))
 
     hunter = Hunter()
@@ -53,8 +52,8 @@ def launch_flat_hunt(config):
 
 def main():
     # parse args
-    parser = argparse.ArgumentParser(description="Searches for houses on Immowelt and sends results to Telegram User",
-                                     epilog="Designed by DerSchimi")
+    parser = argparse.ArgumentParser(description="Searches for houses on Immowelt, Immoscount and ebay classifieds and sends results to Telegram User",
+                                     epilog="Forked by DerSchimi")
     parser.add_argument('--config', '-c',
                         type=argparse.FileType('r'),
                         default='%s/config.yaml' % os.path.dirname(os.path.abspath(__file__)),

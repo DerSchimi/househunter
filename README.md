@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ```
 usage: househunter.py [-h] [--config CONFIG]
 
-Searches for houses on immowelt and sends results
+Searches for houses on immowelt, ebay kleinanzeigen and immoscount and sends results
 to Telegram User
 
 optional arguments:
