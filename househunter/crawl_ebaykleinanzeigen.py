@@ -49,13 +49,13 @@ class CrawlEbayKleinanzeigen:
             address = "https://www.ebay-kleinanzeigen.de/" +title_el.get("href")
             try:
                 #(tags[0].text)
-                rooms = tags[0].text
+                rooms = tags[1].text
             except IndexError:
                 #print("Keine Zimmeranzahl gegeben")
                 rooms = "Nicht gegeben"
             try:
                 #print(tags[1].text)
-                size = tags[1].text
+                size = tags[0].text
             except IndexError:
                 size = "Nicht gegeben"
                 #print("Quadratmeter nicht angegeben")
