@@ -54,7 +54,8 @@ class Hunter:
                 message = config.get('message', "").format(
                     title=expose['title'],
                     rooms=expose['rooms'],
-                    size=expose['size'],
+                    wsize=expose['wsize'],
+                    hsize=expose['hsize'],
                     price=expose['price'],
                     url=expose['url']
                     ).strip()

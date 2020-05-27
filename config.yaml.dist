@@ -28,7 +28,8 @@ urls:
 message: |
     {title}
     Zimmer: {rooms}
-    Größe: {size}
+    Wohnflaeche: {wsize}
+    Grundstueck: {hsize}
     Preis: {price}
 
     {url}

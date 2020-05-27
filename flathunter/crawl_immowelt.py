@@ -31,17 +31,15 @@ class CrawlImmoWelt:
     def extract_data(self, soup):
         entries = []
         soup = soup.find('div',class_ = "iw_list_content")
-        #print soup
         results = soup.find_all(lambda e: e.has_attr('data-estateid') and not e.has_attr('data-action'))
-        #print results
         for index,listing in enumerate(results):
             try:
                 price = listing.find('div',class_=re.compile("hardfact price")).find("strong").text.strip()
                 id = listing.find('a').get('href').split('expose/',1)[1].split('?',1)[0].strip()
                 id = int(id,base=36)
                 url = "https://www.immowelt.de" + listing.find('a').get('href')
-                size = listing.find('div',class_="hardfact ").text
-                size = size.split('ca.)',1)[1].strip()
+                wsize = listing.findAll('div', class_=re.compile("hardfact square"))[0].text.strip().split("\n")[-1]
+                hsize = listing.findAll('div', class_=re.compile("hardfact square"))[1].text.strip().split("\n")[-1]
                 rooms = listing.find('div',class_="hardfact rooms").text
                 rooms = rooms.split('Zimmer',1)[1].strip()
                 address = listing.find('div',class_="listlocation ellipsis relative").text.strip()
@@ -51,7 +49,8 @@ class CrawlImmoWelt:
                     'url':  url ,
                     'title': title,
                     'price': price,
-                    'size': size,
+                    'wsize': wsize,
+                    'hsize':hsize,
                     'rooms': rooms ,
                     'address': address
                 }
