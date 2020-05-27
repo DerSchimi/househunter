@@ -1,41 +1,43 @@
-# Flathunter
+# Househunter
 
 ## Quick Setup
 ```
-sudo apt-get update
-sudo apt-get install wget
-wget https://github.com/tschuehly/flathunter/archive/master.zip
-sudo apt-get install unzip
+sudo apt-get install wget unzip python-pip 
+wget https://github.com/derschimi/househunter/archive/master.zip
 unzip master.zip
-cd flathunter-master
-sudo apt-get install python-pip
+cd househunter-master
 pip install -r requirements.txt
 mv config.yaml.dist config.yaml
 nano config.yaml
-python flathunter.py
+python3 househunter.py
 ```
 ## Run Forever
 
-To run flathunter indefinetly:
+To run househunter indefinetly:
 
 ```
-nohup python run_flathunter_forever.py &
+nohup python3 run_househunter_forever.py &
+```
+## Run on reboot
+Add this to your crontab:
+```
+@reboot cd <yourpath> && /usr/bin/python3 run_househunter_forever.py&
 ```
 
 ## Setup
 
 
 ### Requirements
-Install requirements from ```requirements.txt``` to run execute flathunter properly.
+Install requirements from ```requirements.txt``` to run execute househunter properly.
 ```
 pip install -r requirements.txt
 ```
 
 ## Usage
 ```
-usage: flathunter.py [-h] [--config CONFIG]
+usage: househunter.py [-h] [--config CONFIG]
 
-Searches for flats on Immobilienscout24.de and wg-gesucht.de and sends results
+Searches for houses on immowelt and sends results
 to Telegram User
 
 optional arguments:
@@ -62,10 +64,8 @@ $ curl https://api.telegram.org/bot[BOT-TOKEN]/getUpdates
 Rename the config.yaml.dist to config.yaml and fill as described.
 
 
-## Contributers
+## Constributions/Based on
 - [@NodyHub](https://github.com/NodyHub)
-- Bene
 - [@tschuehly](https://github.com/tschuehly)
-- [@Cugu](https://github.com/Cugu)
 
 
