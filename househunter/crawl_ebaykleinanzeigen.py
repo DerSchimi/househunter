@@ -2,7 +2,8 @@ import logging
 import requests
 import re
 from bs4 import BeautifulSoup
-
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
 
 class CrawlEbayKleinanzeigen:
     __log__ = logging.getLogger(__name__)
@@ -23,7 +24,9 @@ class CrawlEbayKleinanzeigen:
         return entries
 
     def get_page(self, search_url):
-        resp = requests.get(search_url)  # TODO add page_no in url
+        headers = {
+            "User-Agent": self.getRandomUserAgent()}
+        resp = requests.get(search_url, headers=headers)  # TODO add page_no in url
         if resp.status_code != 200:
             self.__log__.error("Got response (%i): %s" % (resp.status_code, resp.content))
         return BeautifulSoup(resp.content, 'html.parser')
@@ -61,7 +64,8 @@ class CrawlEbayKleinanzeigen:
                 'url':  address ,
                 'title': title_el.text.strip(),
                 'price': price,
-                'size': size,
+                'wsize': size,
+                'hsize': 'unknown',
                 'rooms': rooms ,
                 'address': address
             }
@@ -86,3 +90,14 @@ class CrawlEbayKleinanzeigen:
         address = address_raw.strip().replace("\n","") + " "+street_raw.strip()
 
         return address
+
+    def getRandomUserAgent(self):
+        software_names = [SoftwareName.CHROME.value, SoftwareName.FIREFOX.value, SoftwareName.EDGE.value,
+                          SoftwareName.INTERNET_EXPLORER.value, SoftwareName.ANDROID.value]
+        operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]
+        user_agent_rotator = UserAgent(software_names=software_names, operating_systems=operating_systems, limit=100)
+        user_agents = user_agent_rotator.get_user_agents()
+        user_agent = user_agent_rotator.get_random_user_agent()
+        self.__log__.debug('using user agent: ' + str(user_agent))
+
+        return user_agent
