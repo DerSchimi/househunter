@@ -2,27 +2,39 @@
 
 ## Quick Setup
 ```
-sudo apt-get install wget unzip python-pip 
-wget https://github.com/derschimi/househunter/archive/master.zip
-unzip master.zip
-cd househunter-master
-pip install -r requirements.txt
-mv config.yaml.dist config.yaml
+git clone https://github.com/DerSchimi/househunter.git
+cd househunter
+pip3 install -r requirements.txt
+cp config.yaml.dist config.yaml
 nano config.yaml
 python3 househunter.py
 ```
-## Run Forever
+
+## Run forever or run periodically
+
+
+### Run Forever
 
 To run househunter indefinetly:
 
 ```
 nohup python3 run_househunter_forever.py &
 ```
-## Run on reboot
+
+### Run on reboot
 Add this to your crontab:
 ```
 @reboot cd <yourpath> && /usr/bin/python3 run_househunter_forever.py&
 ```
+
+## Run periodically
+
+Edit config.yaml and change loop: active: false
+Add something like this to your crontab:
+```
+@hourly cd <yourpath> && /usr/bin/python3 <yourpath>/househunter.py&```
+
+
 
 ## Setup
 
@@ -30,7 +42,7 @@ Add this to your crontab:
 ### Requirements
 Install requirements from ```requirements.txt``` to run execute househunter properly.
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Usage

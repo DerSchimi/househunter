@@ -52,7 +52,7 @@ def launch_flat_hunt(config):
 
 def main():
     # parse args
-    parser = argparse.ArgumentParser(description="Searches for houses on Immowelt, Immoscount and ebay classifieds and sends results to Telegram User",
+    parser = argparse.ArgumentParser(description="Searches for houses on Immowelt, Immoscout and ebay classifieds and sends results to Telegram User",
                                      epilog="Forked by DerSchimi")
     parser.add_argument('--config', '-c',
                         type=argparse.FileType('r'),
