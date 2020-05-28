@@ -32,9 +32,8 @@ Add this to your crontab:
 Edit config.yaml and change loop: active: false
 Add something like this to your crontab:
 ```
-@hourly cd <yourpath> && /usr/bin/python3 <yourpath>/househunter.py&```
-
-
+@hourly cd <yourpath> && /usr/bin/python3 <yourpath>/househunter.py&
+```
 
 ## Setup
 
