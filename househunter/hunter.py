@@ -34,6 +34,8 @@ class Hunter:
                 break
 
             for expose in results:
+                processed = id_watch.get()
+                self.__log__.debug("Id to check: " + str(expose['id']))
                 # check if already processed
                 if expose['id'] in processed:
                     continue
