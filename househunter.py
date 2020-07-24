@@ -11,6 +11,7 @@ from househunter.idmaintainer import IdMaintainer
 from househunter.hunter import Hunter
 from househunter.crawl_ebaykleinanzeigen import CrawlEbayKleinanzeigen
 from househunter.crawl_immowelt import CrawlImmoWelt
+from househunter.crawl_ohnemaklernet import CrawlOhneMaklerNet
 
 __author__ = "Daniel Schimikowski"
 __version__ = "0.1"
@@ -39,7 +40,7 @@ __log__ = logging.getLogger(__name__)
 
 
 def launch_flat_hunt(config):
-    searchers = [CrawlImmobilienscout(), CrawlEbayKleinanzeigen(),CrawlImmoWelt()]
+    searchers = [CrawlImmobilienscout(), CrawlEbayKleinanzeigen(),CrawlImmoWelt(),CrawlOhneMaklerNet()]
     id_watch = IdMaintainer('%s/processed_ids.db' % os.path.dirname(os.path.abspath(__file__)))
 
     hunter = Hunter()
